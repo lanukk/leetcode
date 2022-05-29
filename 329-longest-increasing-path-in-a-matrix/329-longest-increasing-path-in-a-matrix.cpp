@@ -45,9 +45,11 @@ public:
     }
     
     int longestIncreasingPath(vector<vector<int>>& a) {
-        memset(dp, -1, sizeof(dp));
         int n = (int)a.size();
         int m = (int)a[0].size();
+        for(int i = 0; i <= n; i++)
+            for(int j = 0; j <= m; j++)
+                dp[i][j][0] = dp[i][j][1] = dp[i][j][2] = dp[i][j][3] = -1;
         int ans = 0;
         for(int i = 0; i < n; i++){
             for(int j = 0; j < m; j++){
