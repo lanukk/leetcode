@@ -22,18 +22,10 @@ public:
                 return dp[i][j] = recursion(s, p, i + 1, j + 1);
             return dp[i][j] = 0;
         }
-        // cout<<s<<" "<<p<<" "<<i<<" "<<j<<"\n";
+        
         bool ans = recursion(s, p, i + 2, j);
-        
-        char c = '1';
-        if(s[i + 1] == '.')
-            c = '1';
-        else
-            c = s[i + 1];
-        
-       
-        
-        while(j < p.length() && (c == '1' || c == p[j])){
+
+        while(j < p.length() && (s[i + 1] == '.' || s[i + 1] == p[j])){
             j++;
             ans = (ans | recursion(s, p, i + 2, j));
         }   
