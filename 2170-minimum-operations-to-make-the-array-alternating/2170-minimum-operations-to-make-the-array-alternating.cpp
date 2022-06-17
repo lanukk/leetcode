@@ -14,7 +14,7 @@ public:
             mp2[a[i]]++;
         
         
-        vector<array<int, 2> > v1, v2;
+        vector<pair<int, int> > v1, v2;
         
         for(auto x : mp1)
             v1.push_back({x.second, x.first});
@@ -27,15 +27,15 @@ public:
         reverse(v1.begin(), v1.end());
         reverse(v2.begin(), v2.end());
  
-        if(v1[0][1] != v2[0][1])
-            return n - v1[0][0] - v2[0][0];
+        if(v1[0].second != v2[0].second)
+            return n - v1[0].first - v2[0].first;
         
-        int best_ans = n - v1[0][0];
+        int best_ans = n - v1[0].first;
         
         if((int)v1.size() > 1)
-            best_ans = min(best_ans, n - v1[1][0] - v2[0][0]);
+            best_ans = min(best_ans, n - v1[1].first - v2[0].first);
         if((int)v2.size() > 1)
-            best_ans = min(best_ans, n - v1[0][0] - v2[1][0]);
+            best_ans = min(best_ans, n - v1[0].first - v2[1].first);
         
         return best_ans;        
     }
