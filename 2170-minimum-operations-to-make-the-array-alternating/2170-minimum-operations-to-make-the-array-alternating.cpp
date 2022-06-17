@@ -24,18 +24,20 @@ public:
         
         sort(v1.begin(), v1.end());
         sort(v2.begin(), v2.end());
-        reverse(v1.begin(), v1.end());
-        reverse(v2.begin(), v2.end());
+        // reverse(v1.begin(), v1.end());
+        // reverse(v2.begin(), v2.end());
+        int N = v1.size();
+        int M = v2.size();
  
-        if(v1[0].second != v2[0].second)
-            return n - v1[0].first - v2[0].first;
+        if(v1[N - 1].second != v2[M - 1].second)
+            return n - v1[N - 1].first - v2[M - 1].first;
         
-        int best_ans = n - v1[0].first;
+        int best_ans = n - v1[N - 1].first;
         
         if((int)v1.size() > 1)
-            best_ans = min(best_ans, n - v1[1].first - v2[0].first);
+            best_ans = min(best_ans, n - v1[N - 2].first - v2[M - 1].first);
         if((int)v2.size() > 1)
-            best_ans = min(best_ans, n - v1[0].first - v2[1].first);
+            best_ans = min(best_ans, n - v1[N - 1].first - v2[M - 2].first);
         
         return best_ans;        
     }
