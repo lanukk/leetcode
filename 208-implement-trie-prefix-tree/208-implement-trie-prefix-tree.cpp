@@ -1,17 +1,16 @@
 class TrieNode{
-public:
-    TrieNode *next[26];
-    bool isWord;
+    public:
+    map<char, TrieNode*> next;
+    bool is_word;
     
     TrieNode(){
-        for(int i = 0; i < 26; i++)
-            next[i] = NULL;
-        isWord = false;
+        is_word = false;
     }
 };
 
+
 class Trie {
-    TrieNode *root = NULL;
+    TrieNode* root;
 public:
     Trie() {
         root = new TrieNode();
@@ -21,30 +20,32 @@ public:
         TrieNode *temp = root;
         
         for(char c : word){
-            if(temp -> next[c - 'a'] == NULL){
-                temp -> next[c - 'a'] = new TrieNode();
+            if(temp->next.find(c) == temp->next.end()){
+                temp->next[c] = new TrieNode;
             }
-            temp = temp -> next[c - 'a'];
+            temp = temp->next[c];
         }
-        temp->isWord = true;
+        temp->is_word = true;        
     }
     
     bool search(string word) {
         TrieNode *temp = root;
         for(char c : word){
-            if(temp->next[c - 'a'] == NULL)
+            if(temp->next.find(c) == temp->next.end()){
                 return false;
-            temp = temp->next[c - 'a'];
+            }
+            temp = temp->next[c];
         }
-        return temp->isWord;
+        return temp->is_word;
     }
     
     bool startsWith(string prefix) {
-        TrieNode * temp = root;
+        TrieNode *temp = root;
         for(char c : prefix){
-            if(temp->next[c - 'a'] == NULL)
+            if(temp ->next.find(c) == temp->next.end()){
                 return false;
-            temp = temp -> next[c - 'a'];
+            }
+            temp = temp->next[c];
         }
         return true;
     }
