@@ -7,19 +7,19 @@ public:
     }
     
     void addNum(int num) {
-       if(left.size() == 0 || left.top() > num)
-           left.push(num);
+        if(left.size() == 0 || num < left.top())
+            left.push(num);
         else
             right.push(num);
         
-        if((int)left.size() == ((int)right.size() + 2)){
+        if((int)left.size() == (int)right.size() + 2){
             right.push(left.top());
             left.pop();
         }
-        else if(((int)left.size() + 2) == (int)right.size()){
+        if((int)right.size() == (int)left.size() + 2){
             left.push(right.top());
             right.pop();
-        }    
+        }        
     }
     
     double findMedian() {
