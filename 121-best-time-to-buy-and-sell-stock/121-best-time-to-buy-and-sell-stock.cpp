@@ -51,7 +51,15 @@ public:
     }
     
     int maxProfit(vector<int>& prices) {
-        vector<vector<int>>dp((int)prices.size(), vector<int>(2, -1));
-        return recursion(0, false, prices, dp);
+        // vector<vector<int>>dp((int)prices.size(), vector<int>(2, -1));
+        // return recursion(0, false, prices, dp);
+        int ans = 0;
+        int prefixMinimum = prices[0];
+        
+        for(int &i : prices){
+            ans = max(ans, i - prefixMinimum);
+            prefixMinimum = min(i, prefixMinimum);
+        }
+        return ans;
     }
 };
