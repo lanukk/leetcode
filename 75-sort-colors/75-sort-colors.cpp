@@ -19,12 +19,12 @@ public:
     arr[mid] == 0:
         swap(arr[low], arr[mid]);
         low ++;
+        mid++;
     arr[mid] == 1:
-        do nothing
+        mid++;
     arr[mid] == 2:
         swap(arr[high], arr[mid]);
         
-    mid++;
     */
     
     void sortColors(vector<int>& nums) {
