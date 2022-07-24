@@ -3,30 +3,29 @@ public:
     /*
     
     
+    arr    = [1,   2,  4,  3,  1,  3,  3,  3,  3]
+    temp   = [-1, -1, -1, +1, -1, +1, +1, +1, +1]
+    
+    
+    For all the elements which are majorityElement I will set temp[i] = +1
+    
+    For all the elements which are majorityElement I will set temp[i] = -1
+    
+    majorityElement = 3
+    3 is repeating more than n / 2 times.
     
     */
     
     int majorityElement(vector<int>& nums) {
-        int n = (int)nums.size();
+        int count = 0;
+        int candidate = -1;
         
-        int bit[32] = {0};
         for(int i : nums){
-            for(int j = 0; j < 32; j++){
-                if(i & (1 << j)){
-                    bit[j] += 1;
-                }
-            }
+            if(count == 0)
+                candidate = i;
+            count += (i == candidate) ? +1 : -1;
         }
         
-        
-        int ans = 0;
-        for(int i = 0; i < 32; i++){
-            if(bit[i] > n / 2){
-                //this bit will be set in our answer definately
-                ans = (ans | (1 << i));
-            }
-        }
-        
-        return ans;        
+        return candidate;
     }
 };
