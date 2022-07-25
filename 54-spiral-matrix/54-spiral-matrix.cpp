@@ -7,55 +7,61 @@ public:
         
         int colRightLimit = m, colLeftLimit = -1, rowUpLimit = -1, rowDownLimit = n;
         int x = n * m;
-        cout<<colRightLimit<<"\n\n";
         while(1){
             int i = rowUpLimit + 1;
             int j = colLeftLimit + 1;
 
             
             while(j != colRightLimit){
-                cout<<i<<" "<<j<<"\n";
                 ans.push_back(a[i][j]);
                 x--;
-                cout<<a[i][j]<<"\n";
                 j++;
             }
-            if(x == 0)break;
+            
             j--;
             rowUpLimit++;
             
+            if(!x)break;
+                        
             i = rowUpLimit + 1;
             
             while(i != rowDownLimit){
-                ans.push_back(a[i][j]);x--;
+                ans.push_back(a[i][j]);
+                x--;
                 i++;
             }
-            if(x == 0)break;
+            
             i--;
             colRightLimit--;
-            // 
+            
+            if(!x)break;
             
             j = colRightLimit - 1;
             
             while(j != colLeftLimit){
-                ans.push_back(a[i][j]);x--;
+                ans.push_back(a[i][j]);
+                x--;
                 j--;
             }
-            if(x == 0)break;
+            
             j++;
             
             rowDownLimit--;
             
+            if(!x)break;
+            
             i = rowDownLimit - 1;
             
-            while(i != rowUpLimit){cout<<"?";
-                ans.push_back(a[i][j]);x--;
+            while(i != rowUpLimit){
+                ans.push_back(a[i][j]);
+                x--;
                 i--;
             }
-            if(x == 0)break;
+            
             i++;
             colLeftLimit++;
-            // break;
+            
+            if(!x)break;
         }
         
         return ans;
