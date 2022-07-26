@@ -11,14 +11,12 @@
 class Solution {
 public:
     int getDecimalValue(ListNode* head) {
-        vector<int> a;
+        int decimal = 0;
         while(head != NULL){
-            for(int & i : a)
-                i *= 2;
-            if(head->val)
-                a.push_back(1);
+            decimal = (decimal << 1);
+            decimal += head->val;
             head = head->next;
         }
-        return accumulate(a.begin(), a.end(), 0);
+        return decimal;
     }
 };
