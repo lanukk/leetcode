@@ -12,7 +12,7 @@ class Solution {
 public:
     ListNode* rotateRight(ListNode* head, int k) {
         if(head == NULL)return NULL;
-        map<int, ListNode*> mp;
+        unordered_map<int, ListNode*> mp;
         int d = 0;
         ListNode*temp = head;
         
