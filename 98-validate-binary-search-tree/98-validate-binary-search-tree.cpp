@@ -12,17 +12,24 @@
 class Solution {
 public:
     
-    bool helper(TreeNode* root, long long atLeast, long long atMax){
-        if(root == NULL)
+    bool helper(TreeNode* root, TreeNode* &prev){
+        if(root == NULL){
             return true;
-        
-        if(root->val <= atLeast || root->val >= atMax)
+        }
+        if(!helper(root->left, prev))
+            return false;
+                
+        if(prev != NULL && prev->val >= root->val)
             return false;
         
-        return (helper(root->left, atLeast, root->val) & helper(root->right, root->val, atMax));
+        prev = root;
+        
+        
+        return helper(root->right, prev);
     }
     
     bool isValidBST(TreeNode* root) {
-        return helper(root, LLONG_MIN, LLONG_MAX);
+        TreeNode* prev = NULL;
+        return helper(root, prev);
     }
 };
