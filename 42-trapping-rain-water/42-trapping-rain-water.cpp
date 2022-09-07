@@ -1,37 +1,35 @@
 class Solution {
 public:
     
-    int findSolve(vector<int> &a, bool equal){
-        int n = (int) a.size();
+    int countWater(vector<int> & a, bool equal){
         int ans = 0;
-        for(int i = 0; i < n; i++){
-            int curr = a[i];
-            int j = i + 1;
-            int sum = 0;
-            while(j < n){
-                if(equal && a[i] == a[j])
-                    break;
-                if(a[i] < a[j])
-                    break;
-                sum += a[j];
-                j++;
+        
+        int index = 0;
+        int sum = 0;
+        
+        for(int i = 1; i < (int)a.size(); i++){
+            if(a[i] > a[index]){
+                ans += (a[index] * (i - index - 1)) - sum;
+                sum = 0;
+                index= i;
+            } else if(a[i] == a[index] && equal){
+                ans += (a[index] * (i - index - 1)) - sum;
+                sum = 0;
+                index= i;
+            } else {
+                sum += a[i];
             }
-            if(j == n)
-                break;
-            
-            ans += (a[i] * (j - i - 1)) - sum;
-            i = j - 1;
         }
         return ans;
     }
     
-    int trap(vector<int>& height) {
+    int trap(vector<int>& a) {
         int ans = 0;
+        ans += countWater(a, true);
+        cout<<ans<<"\n";
+        reverse(a.begin(), a.end());
+        ans += countWater(a, false);
         
-        ans = findSolve(height, 1);
-        reverse(height.begin(), height.end());
-        ans += findSolve(height, 0);
-        
-        return ans;        
+        return ans;
     }
 };
